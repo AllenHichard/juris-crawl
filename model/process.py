@@ -13,6 +13,19 @@ class Process:
         self.parts = []
         self.movements = []
 
+
+    def json(self):
+        return {
+            "Classe" : self.justice_class,
+            "Área": self.area,
+            "Assunto": self.subject,
+            "Data de Distribuição": self.distribution_date,
+            "Juiz": self.judge,
+            "Valor da Ação": self.action_value,
+            "Partes do Processo": [part.json() for part in self.parts],
+            "Lista das ùltimas Movimentações": [movement.json() for movement in self.movements]
+        }
+
     def __str__(self):
         print(self.justice_class)
         print(self.area)

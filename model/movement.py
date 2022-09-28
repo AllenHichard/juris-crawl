@@ -5,6 +5,13 @@ class Movement:
         self.description = description
         self.complement = complement
 
+    def json(self):
+        return {
+            "Data": self.date,
+            "Descrição": self.description,
+            "Complemento": self.complement
+        }
+
     def set_date(self, date):
         self.date = date
 

@@ -5,6 +5,13 @@ class Part:
         self.clients = clients
         self.lawyers = lawyers
 
+    def json(self):
+        return {
+            self.pole: {
+                "Envolvidos": [client for client in self.clients] + [attorney for attorney in self.lawyers],
+            }
+        }
+
     def set_lawyers(self,lawyers):
         self.lawyers = lawyers
 
