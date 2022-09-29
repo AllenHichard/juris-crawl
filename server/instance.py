@@ -7,7 +7,4 @@ class Server:
         self.app = Flask(__name__)
 
     def run(self):
-        self.app.run(
-            port=28652,
-            debug=True
-        )
+        self.app.run()
