@@ -1,4 +1,4 @@
-from web import session
+from web import session_requests as session
 from flask import Flask, Response
 import json
 
