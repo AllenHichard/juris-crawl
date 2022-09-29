@@ -18,8 +18,11 @@ def connected_api():
 @app.route("/api/consult/<cnj>", methods=["GET"])
 def consult_process(cnj):
     s = session.Session(cnj=cnj)
-    s.consult_process()
-    return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+    if len(s.cnj) == 20:
+        s.consult_process()
+        return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+    else:
+        return Response(response=json.dumps({"Status": "cnj incorreto"}), status=200, mimetype="application/json")
 
 
 if __name__ == "__main__":

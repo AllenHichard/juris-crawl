@@ -25,7 +25,8 @@ class Session:
         if self.type_court in dict_courts:
             return self.consult_validated_process(dict_courts[self.type_court])
         else:
-            return {"Status": "O processo pertence a Alagoas ou Ceará"}
+            self.results = {"Status": "O processo pertence a Alagoas ou Ceará"}
+            return self.results
 
     def change_query_route(self, html):
         soap = bs.BeautifulSoup(html, "html.parser")
