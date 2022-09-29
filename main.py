@@ -11,7 +11,7 @@ def default():
     #return {"status": "access the api route"}
     s = session.Session(cnj="0710802-55.2018.8.02.0001")
     s.consult_process()
-    return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+    return {"status": "browser successfully connected"}
 
 
 @app.route("/api", methods=["GET"])
