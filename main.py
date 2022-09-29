@@ -7,12 +7,14 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    return {"status": "access the api route"}
+    import requests
+    a = requests.get("https://www2.tjal.jus.br/cpopg/show.do?processo.codigo=01000O7550000&processo.foro=1&processo.numero=0710802-55.2018.8.02.0001")
+    return {"Status": str(a)}
 
 
 @app.route("/api", methods=["GET"])
 def connected_api():
-    return {"status": "browser successfully connected"}
+    return {"Status": "browser successfully connected"}
 
 
 @app.route("/api/consult/<cnj>", methods=["GET"])
