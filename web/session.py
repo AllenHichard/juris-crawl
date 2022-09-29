@@ -16,13 +16,15 @@ class Session:
         self.results = dict()
 
     def consult_process(self):
-        for degree_court in self.degrees_court:
+        for index, degree_court in enumerate(self.degrees_court):
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             response = self.session.get(self.court.url_request)
             if response.status_code == 200:
                 html = response.text
-                if "processoSelecionado" in html:
-                    soap = bs.BeautifulSoup(html, "html.parser")
+                soap = bs.BeautifulSoup(html, "html.parser")
+                if "Não existem informações disponíveis para os parâmetros informados." in html:
+                    continue
+                elif "processoSelecionado" in html:
                     selected_process = soap.find(id="processoSelecionado")["value"]
                     response = self.session.get(self.court.sub_query(selected_process))
                     if response.status_code == 200:

@@ -22,4 +22,4 @@ class ConfigurationRequisition(pattern.Court):
         return "&".join(list_route)
 
     def sub_query(self, selected_process):
-        return "https://www2.tjal.jus.br/cposg5/show.do?" + f"processo.codigo={selected_process}"
+        return "https://esaj.tjce.jus.br/cposg5/show.do?" + f"processo.codigo={selected_process}"
