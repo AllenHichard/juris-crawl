@@ -18,7 +18,7 @@ class Session:
     def consult_process(self):
         for index, degree_court in enumerate(self.degrees_court):
             self.court = degree_court.ConfigurationRequisition(self.cnj)
-            response = self.session.get(self.court.url_request)
+            response = self.session.get(self.court.url_request, verify=False)
             if response.status_code == 200:
                 html = response.text
                 soap = bs.BeautifulSoup(html, "html.parser")
@@ -26,7 +26,7 @@ class Session:
                     continue
                 elif "processoSelecionado" in html:
                     selected_process = soap.find(id="processoSelecionado")["value"]
-                    response = self.session.get(self.court.sub_query(selected_process))
+                    response = self.session.get(self.court.sub_query(selected_process), verify=False)
                     if response.status_code == 200:
                         html = response.text
                 extraction = soup_web.Extraction(html)
