@@ -18,4 +18,5 @@ def consult_process(cnj):
     return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
 
 
-instance.run()
+if __name__ in "__main__":
+    instance.run()
