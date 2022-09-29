@@ -33,7 +33,7 @@ Data to be collected:
 The system has an api hosted on a free server, so it is possible to test the system without running the algorithm on the local machine.
 
 - `api link`- Get method was used for testing convenience, so no need to configure payloads or headers to run the application.
-  - https://consultation-in-courts.herokuapp.com/api/consult/<<cnj>>
+  - https://consultation-in-courts.herokuapp.com/api/consult/{{cnj}}
 
 - `example` - Algorithm will accept full cnj patterns (25 characters) or just numbers (20 characters)
   - https://consultation-in-courts.herokuapp.com/api/consult/00703379120088060001
