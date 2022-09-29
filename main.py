@@ -2,8 +2,8 @@ from web import session
 from flask import Response
 import json
 from server import instance
-instance = instance.Server()
 
+instance = instance.Server()
 app = instance.app
 
 
