@@ -27,10 +27,6 @@ class Session:
         else:
             return {"Status": "O processo pertence a Alagoas ou Ceará"}
 
-    def access_restriction(self, html):
-        if "Não existem informações disponíveis para os parâmetros informados." in html:
-            return True
-        return False
 
     def change_query_route(self, html):
         soap = bs.BeautifulSoup(html, "html.parser")
@@ -44,18 +40,14 @@ class Session:
         for index, degree_court in enumerate(degrees_court):
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
-            response = self.request.request("GET", self.court.url_request)
-            html = response.data.decode("utf-8")
-            if self.access_restriction(html):
-                self.results[key_result] = {"Status": "Acesso Restrito"}
-                continue
-            html = self.change_query_route(html)
-            if self.access_restriction(html):
-                self.results[key_result] = {"Status": "Acesso Restrito"}
-                continue
-            extraction = soup_web.Extraction(html)
-            extraction.load()
-            self.returned_processes.append(extraction.process)
-            self.results[key_result] = extraction.process.json()
-
+            try:
+                response = self.request.request("GET", self.court.url_request)
+                html = response.data.decode("utf-8")
+                html = self.change_query_route(html)
+                extraction = soup_web.Extraction(html)
+                extraction.load()
+                self.returned_processes.append(extraction.process)
+                self.results[key_result] = extraction.process.json()
+            except:
+                self.results[key_result] = {"Status": "Crawler Impedido de Acessar"}
         return self.results

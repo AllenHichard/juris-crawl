@@ -17,6 +17,11 @@ Courts where data will be collected:
   - 1º degree - https://esaj.tjce.jus.br/cpopg/open.do
   - 2º degree - https://esaj.tjce.jus.br/cposg5/open.do 
 
+Were tested:
+
+- **1347** lawsuits in the court of Alagoas
+- **7842** lawsuits in the court of Ceará
+
 Data to be collected:
 
 - class
@@ -54,6 +59,12 @@ If you want to run the project locally, you will need to follow these steps:
 
 - `main` - run the main program file.
   - 'main.py' 
+
+## ☑️How to test the robot?
+
+- run the file **pdf/general.py**.
+  - General.py reads two documents from the official journal (Alagoas and Ceará), and applies a parser to capture the cnj numbers and then runs the crawler on the processes collected from the pdf;
+
 
 ## ☑️ comments
 
