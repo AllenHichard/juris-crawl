@@ -1,7 +1,8 @@
 from web import session
 from flask import Response
-from server import instance
 import json
+from server import instance
+instance = instance.Server()
 
 app = instance.app
 

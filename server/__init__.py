@@ -1,3 +1,3 @@
-from server import instance
-
-instance = instance.Server()
+# from server import instance
+#
+# instance = instance.Server()
