@@ -27,3 +27,4 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 #UNSAFE_LEGACY_RENEGOTIATION_DISABLED - Heroku
+#https://stackoverflow.com/questions/71603314/ssl-error-unsafe-legacy-renegotiation-disabled
