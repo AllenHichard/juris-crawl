@@ -10,7 +10,6 @@ class Session:
         self.court = None
         self.session = requests.Session()
         self.cnj = cnj.replace(".", "").replace("-", "")
-        print(self.cnj)
         self.type_court = self.cnj[14:16]
         self.degrees_court = dict_courts[self.type_court]
         self.results = dict()
