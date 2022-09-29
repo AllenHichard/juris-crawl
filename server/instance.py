@@ -8,5 +8,6 @@ class Server:
 
     def run(self):
         self.app.run(
+            port=28652,
             debug=True
         )
