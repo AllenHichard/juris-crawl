@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def default():
     import requests
-    a = requests.get("https://www2.tjal.jus.br/cpopg/show.do?processo.codigo=01000O7550000&processo.foro=1&processo.numero=0710802-55.2018.8.02.0001")
+    a = requests.get("https://www2.tjal.jus.br/cpopg/show.do?processo.codigo=01000O7550000&processo.foro=1&processo.numero=0710802-55.2018.8.02.0001", verify=False)
     return {"Status": str(a)}
 
 
