@@ -8,5 +8,5 @@ class Server:
 
     def run(self):
         self.app.run(
-            port=8080
+            port=80
         )

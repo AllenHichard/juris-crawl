@@ -7,7 +7,7 @@ app = instance.app
 
 
 @app.route("/", methods=["GET"])
-def connected_api():
+def default():
     return {"status": "access the api route"}
 
 
