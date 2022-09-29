@@ -1,10 +1,9 @@
 from web import session
-from flask import Response
+from flask import Flask, Response
 import json
-from server import instance
 
-instance = instance.Server()
-app = instance.app
+
+app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
@@ -25,4 +24,4 @@ def consult_process(cnj):
 
 
 if __name__ in "__main__":
-    instance.run()
+    app.run()
