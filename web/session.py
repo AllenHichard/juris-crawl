@@ -12,7 +12,6 @@ class Session:
         self.request = urllib3.PoolManager(ssl_context=self.config_ssl_op_legacy_server_connect())
         self.cnj = cnj.replace(".", "").replace("-", "")
         self.type_court = self.cnj[14:16]
-        self.degrees_court = dict_courts[self.type_court]
         self.returned_processes = []
         self.results = dict()
 
@@ -23,25 +22,40 @@ class Session:
         return ctx
 
     def consult_process(self):
-        for index, degree_court in enumerate(self.degrees_court):
+        if self.type_court in dict_courts:
+            return self.consult_validated_process(dict_courts[self.type_court])
+        else:
+            return {"Status": "O processo pertence a Alagoas ou Ceará"}
+
+    def access_restriction(self, html):
+        if "Não existem informações disponíveis para os parâmetros informados." in html:
+            return True
+        return False
+
+    def change_query_route(self, html):
+        soap = bs.BeautifulSoup(html, "html.parser")
+        if "processoSelecionado" in html:
+            selected_process = soap.find(id="processoSelecionado")["value"]
+            response = self.request.request("GET", self.court.sub_query(selected_process))
+            html = response.data.decode("utf-8")
+        return html
+
+    def consult_validated_process(self, degrees_court):
+        for index, degree_court in enumerate(degrees_court):
             self.court = degree_court.ConfigurationRequisition(self.cnj)
+            key_result = self.court.state + " " + self.court.degree
             response = self.request.request("GET", self.court.url_request)
-            if response.status == 200:
-                html = response.data.decode("utf-8")
-                # print(html)
-                soap = bs.BeautifulSoup(html, "html.parser")
-                if "Não existem informações disponíveis para os parâmetros informados." in html:
-                    continue
-                elif "Se for uma parte ou interessado, digite a senha do processo" in html:
-                    continue
-                elif "processoSelecionado" in html:
-                    selected_process = soap.find(id="processoSelecionado")["value"]
-                    response = self.request.request("GET", self.court.sub_query(selected_process))
-                    if response.status == 200:
-                        html = response.data.decode("utf-8")
-                extraction = soup_web.Extraction(html)
-                extraction.load()
-                key_result = self.court.state + " " + self.court.degree
-                self.returned_processes.append(extraction.process)
-                self.results[key_result] = extraction.process.json()
+            html = response.data.decode("utf-8")
+            if self.access_restriction(html):
+                self.results[key_result] = {"Status": "Acesso Restrito"}
+                continue
+            html = self.change_query_route(html)
+            if self.access_restriction(html):
+                self.results[key_result] = {"Status": "Acesso Restrito"}
+                continue
+            extraction = soup_web.Extraction(html)
+            extraction.load()
+            self.returned_processes.append(extraction.process)
+            self.results[key_result] = extraction.process.json()
+
         return self.results
