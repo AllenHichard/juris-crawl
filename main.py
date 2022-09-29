@@ -20,7 +20,8 @@ def connected_api():
 def consult_process(cnj):
     s = session.Session(cnj=cnj)
     s.consult_process()
-    return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+    return s.results
+    #return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
 
 
 if __name__ == "__main__":
