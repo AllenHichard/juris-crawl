@@ -12,6 +12,7 @@ class Session:
         self.cnj = cnj.replace(".", "").replace("-", "")
         self.type_court = self.cnj[14:16]
         self.degrees_court = dict_courts[self.type_court]
+        self.returned_processes = []
         self.results = dict()
 
     def consult_process(self):
@@ -29,5 +30,6 @@ class Session:
                 extraction = soup_web.Extraction(html)
                 extraction.load()
                 key_result = self.court.state + " " + self.court.degree
+                self.returned_processes.append(extraction.process)
                 self.results[key_result] = extraction.process.json()
         return self.results

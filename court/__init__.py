@@ -1,4 +1,4 @@
-from court import alagoas_first_degree, alagoas_second_degree, ceara_first_degree, ceara_second_degree
+from court import alagoas_first_degree, alagoas_second_degree, ceara_first_degree, ceara_second_degree, pattern
 
 dict_courts = {
     "02": (alagoas_first_degree, alagoas_second_degree),
