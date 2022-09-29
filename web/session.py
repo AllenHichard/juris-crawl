@@ -32,6 +32,8 @@ class Session:
                 soap = bs.BeautifulSoup(html, "html.parser")
                 if "Não existem informações disponíveis para os parâmetros informados." in html:
                     continue
+                elif "Se for uma parte ou interessado, digite a senha do processo" in html:
+                    continue
                 elif "processoSelecionado" in html:
                     selected_process = soap.find(id="processoSelecionado")["value"]
                     response = self.request.request("GET", self.court.sub_query(selected_process))
