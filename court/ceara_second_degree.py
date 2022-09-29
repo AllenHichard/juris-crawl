@@ -5,6 +5,8 @@ class ConfigurationRequisition(pattern.Court):
     def __init__(self, cnj):
         super().__init__()
         self.cnj = cnj
+        self.state = "Ceará"
+        self.degree = "Segundo Grau"
         self.root_url = "https://esaj.tjce.jus.br/cposg5/search.do?"
         self.url_request = self.root_url + self.configure_route()
 
