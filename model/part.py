@@ -12,7 +12,7 @@ class Part:
             }
         }
 
-    def set_lawyers(self,lawyers):
+    def set_lawyers(self, lawyers):
         self.lawyers = lawyers
 
     def set_clients(self, clients):

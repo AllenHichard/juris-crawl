@@ -7,11 +7,11 @@ import bs4 as bs
 class Session:
 
     def __init__(self, cnj):
+        self.court = None
         self.session = requests.Session()
         self.cnj = cnj.replace(".", "").replace("-", "")
         self.type_court = self.cnj[14:16]
         self.degrees_court = dict_courts[self.type_court]
-
 
     def consult_process(self):
         for degree in self.degrees_court:
@@ -28,4 +28,3 @@ class Session:
                 extraction = soup_web.Extraction(html)
                 extraction.load()
                 return extraction.process
-                #extraction.process.__str__()

@@ -22,7 +22,8 @@ class Extraction:
             "movements": ("tabelaUltimasMovimentacoes", self.process.add_movements)
         }
 
-    def format_response(self, data_field):
+    @classmethod
+    def format_response(cls, data_field):
         validate_data_field = filter(lambda caracter: caracter not in ["\t", "\r", "\n"], data_field.strip())
         return "".join(list(validate_data_field)).strip()
 
