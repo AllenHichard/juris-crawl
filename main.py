@@ -6,6 +6,11 @@ import json
 app = instance.app
 
 
+@app.route("/", methods=["GET"])
+def connected_api():
+    return {"status": "access the api route"}
+
+
 @app.route("/api", methods=["GET"])
 def connected_api():
     return {"status": "browser successfully connected"}
