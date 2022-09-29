@@ -24,6 +24,6 @@ def consult_process(cnj):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 #UNSAFE_LEGACY_RENEGOTIATION_DISABLED - Heroku
