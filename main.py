@@ -2,16 +2,12 @@ from web import session
 from flask import Flask, Response
 import json
 
-
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
 def default():
-    #return {"status": "access the api route"}
-    s = session.Session(cnj="0710802-55.2018.8.02.0001")
-    s.consult_process()
-    return {"status": "browser successfully connected"}
+    return {"status": "access the api route"}
 
 
 @app.route("/api", methods=["GET"])
@@ -28,6 +24,3 @@ def consult_process(cnj):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-#UNSAFE_LEGACY_RENEGOTIATION_DISABLED - Heroku
-#https://stackoverflow.com/questions/71603314/ssl-error-unsafe-legacy-renegotiation-disabled
