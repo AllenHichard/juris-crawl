@@ -27,7 +27,6 @@ class Session:
         else:
             return {"Status": "O processo pertence a Alagoas ou Ceará"}
 
-
     def change_query_route(self, html):
         soap = bs.BeautifulSoup(html, "html.parser")
         if "processoSelecionado" in html:

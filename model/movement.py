@@ -20,6 +20,3 @@ class Movement:
 
     def set_complement(self, complement):
         self.complement = complement
-
-    def __str__(self):
-        print(self.date, self.description, self.complement)

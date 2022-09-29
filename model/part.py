@@ -17,6 +17,3 @@ class Part:
 
     def set_clients(self, clients):
         self.clients = clients
-
-    def __str__(self):
-        print(self.pole, self.clients, self.lawyers)

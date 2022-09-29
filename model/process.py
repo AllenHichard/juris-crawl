@@ -25,18 +25,6 @@ class Process:
             "Lista das ùltimas Movimentações": [movement_value.json() for movement_value in self.movements]
         }
 
-    def __str__(self):
-        print(self.justice_class)
-        print(self.area)
-        print(self.subject)
-        print(self.distribution_date)
-        print(self.judge)
-        print(self.action_value)
-        for p in self.parts:
-            p.__str__()
-        for m in self.movements:
-            m.__str__()
-
     def set_justice_class(self, justice_class):
         self.justice_class = justice_class
 
