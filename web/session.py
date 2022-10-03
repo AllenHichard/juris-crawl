@@ -46,7 +46,7 @@ class Session:
             try:
                 response = self.request.request("GET", self.court.url_request)
                 html = response.text
-                html = self.change_query_route(html)
+                #html = self.change_query_route(html)
                 extraction = soup_web.Extraction(html)
                 extraction.load()
                 self.returned_processes.append(extraction.process)
