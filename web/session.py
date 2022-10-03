@@ -3,8 +3,7 @@ from web import extraction as soup_web
 import bs4 as bs
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
-import os
-os.environ['no_proxy'] = ''
+
 
 class Session:
 
@@ -52,6 +51,3 @@ class Session:
             except:
                 self.results[key_result] = {"Status": "Crawler Impedido de Acessar"}
         return self.results
-
-# https://stackoverflow.com/questions/40430799/503-reponse-when-trying-to-use-python-request-on-local-website
-# https://stackoverflow.com/questions/20832298/python-requests-503-erros-when-trying-to-access-localhost8000
