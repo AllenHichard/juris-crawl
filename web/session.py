@@ -28,11 +28,11 @@ class Session:
             self.results = {"Status": "O processo pertence a Alagoas ou Ceará"}
             return self.results
 
-    def change_query_route(self, html):
+    def change_query_route(self, html, proxy):
         soap = bs.BeautifulSoup(html, "html.parser")
         if "processoSelecionado" in html:
             selected_process = soap.find(id="processoSelecionado")["value"]
-            response = self.request.request("GET", self.court.sub_query(selected_process))
+            response = proxy.urlopen("GET", self.court.sub_query(selected_process))
             html = response.data.decode("utf-8")
         return html
 
@@ -41,9 +41,12 @@ class Session:
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
             try:
-                response = self.request.request("GET", self.court.url_request)
+                proxy_url = 'http://localhost:5000/'
+                proxy = urllib3.proxy_from_url(proxy_url)
+
+                response = proxy.urlopen("GET", self.court.url_request)
                 html = response.data.decode("utf-8")
-                html = self.change_query_route(html)
+                html = self.change_query_route(html, proxy)
                 extraction = soup_web.Extraction(html)
                 extraction.load()
                 self.returned_processes.append(extraction.process)
