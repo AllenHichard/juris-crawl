@@ -3,7 +3,8 @@ from web import extraction as soup_web
 import bs4 as bs
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
-
+import os
+os.environ['no_proxy'] = '*'
 
 class Session:
 
@@ -14,8 +15,6 @@ class Session:
         self.type_court = self.cnj[14:16]
         self.returned_processes = []
         self.results = dict()
-        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-                        'Content-Type': 'text/html;charset=UTF-8'}
 
     def config_ssl_op_legacy_server_connect(self):
         ctx = create_urllib3_context()
@@ -34,7 +33,7 @@ class Session:
         soap = bs.BeautifulSoup(html, "html.parser")
         if "processoSelecionado" in html:
             selected_process = soap.find(id="processoSelecionado")["value"]
-            response = self.request.request("GET", self.court.sub_query(selected_process), headers=self.headers)
+            response = self.request.request("GET", self.court.sub_query(selected_process))
             html = response.data.decode("utf-8")
         return html
 
@@ -43,7 +42,7 @@ class Session:
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
             try:
-                response = self.request.request("GET", self.court.url_request, headers=self.headers)
+                response = self.request.request("GET", self.court.url_request)
                 html = response.data.decode("utf-8")
                 html = self.change_query_route(html)
                 extraction = soup_web.Extraction(html)
@@ -54,6 +53,5 @@ class Session:
                 self.results[key_result] = {"Status": "Crawler Impedido de Acessar"}
         return self.results
 
-
-#https://stackoverflow.com/questions/40430799/503-reponse-when-trying-to-use-python-request-on-local-website
-#https://stackoverflow.com/questions/20832298/python-requests-503-erros-when-trying-to-access-localhost8000
+# https://stackoverflow.com/questions/40430799/503-reponse-when-trying-to-use-python-request-on-local-website
+# https://stackoverflow.com/questions/20832298/python-requests-503-erros-when-trying-to-access-localhost8000
