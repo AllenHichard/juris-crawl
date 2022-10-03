@@ -8,7 +8,9 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    a = requests.get("https://www2.tjal.jus.br/cpopg/open.do", proxies = {
+    session = requests.Session()
+    session.trust_env = False
+    a = session.get("https://www2.tjal.jus.br/cpopg/open.do", proxies = {
           "http": None,
           "https": None,
         })
