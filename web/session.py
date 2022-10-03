@@ -37,6 +37,7 @@ class Session:
         return html
 
     def consult_validated_process(self, degrees_court):
+        self.request.request("GET", "https://www2.tjal.jus.br/cpopg/open.do")
         for index, degree_court in enumerate(degrees_court):
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
