@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    t = requests.get("https://www2.tjal.jus.br/cpopg/open.do", timeout=5).status_code
+    t = requests.get("https://www2.tjal.jus.br/cpopg/open.do", timeout=5, verify=False).status_code
     return {"Status": "access the api route teste" + str(t)}
 
 
