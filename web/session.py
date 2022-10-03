@@ -3,13 +3,16 @@ from web import extraction as soup_web
 import bs4 as bs
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
+import requests
 
 
 class Session:
 
     def __init__(self, cnj):
         self.court = None
-        self.request = urllib3.PoolManager(ssl_context=self.config_ssl_op_legacy_server_connect())
+        #self.request = urllib3.PoolManager(ssl_context=self.config_ssl_op_legacy_server_connect())
+        self.request = requests.Session()
+        self.request.stream = False
         self.cnj = cnj.replace(".", "").replace("-", "")
         self.type_court = self.cnj[14:16]
         self.returned_processes = []
@@ -33,7 +36,7 @@ class Session:
         if "processoSelecionado" in html:
             selected_process = soap.find(id="processoSelecionado")["value"]
             response = self.request.request("GET", self.court.sub_query(selected_process))
-            html = response.data.decode("utf-8")
+            html = response.text
         return html
 
     def consult_validated_process(self, degrees_court):
@@ -42,7 +45,7 @@ class Session:
             key_result = self.court.state + " " + self.court.degree
             try:
                 response = self.request.request("GET", self.court.url_request)
-                html = response.data.decode("utf-8")
+                html = response.text
                 html = self.change_query_route(html)
                 extraction = soup_web.Extraction(html)
                 extraction.load()
