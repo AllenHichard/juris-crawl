@@ -1,15 +1,13 @@
 from web import session as session
 from flask import Flask, Response
 import json
-import requests
 
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
 def default():
-    t = requests.get("https://www2.tjal.jus.br/cpopg/open.do", timeout=5, verify=False).status_code
-    return {"Status": "access the api route teste" + str(t)}
+    return {"Status": "access the api route"}
 
 
 @app.route("/api", methods=["GET"])
