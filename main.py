@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    return {"Status": "access the api route"}
+    return {"Status": "access the api route teste"}
 
 
 @app.route("/api", methods=["GET"])
