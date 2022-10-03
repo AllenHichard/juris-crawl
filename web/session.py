@@ -14,7 +14,8 @@ class Session:
         self.type_court = self.cnj[14:16]
         self.returned_processes = []
         self.results = dict()
-        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+                        'Content-Type': 'text/html;charset=UTF-8'}
 
     def config_ssl_op_legacy_server_connect(self):
         ctx = create_urllib3_context()
