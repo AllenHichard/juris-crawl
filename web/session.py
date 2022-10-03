@@ -9,7 +9,7 @@ class Session:
 
     def __init__(self, cnj):
         self.court = None
-        self.request = urllib3.PoolManager(ssl_context=self.config_ssl_op_legacy_server_connect())
+        self.request = urllib3.PoolManager(ssl_context=self.config_ssl_op_legacy_server_connect(), assert_hostname=False)
         self.cnj = cnj.replace(".", "").replace("-", "")
         self.type_court = self.cnj[14:16]
         self.returned_processes = []
