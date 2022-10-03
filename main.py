@@ -1,22 +1,13 @@
 from web import session as session
 from flask import Flask, Response
 import json
-import requests
-import os
-os.environ['no_proxy'] = '*'
 
 app = Flask(__name__)
 
 
 @app.route("/", methods=["GET"])
 def default():
-    session = requests.Session()
-    session.trust_env = False
-    a = session.get("https://www2.tjal.jus.br/cpopg/open.do", proxies = {
-          "http": "",
-          "https": "",
-        })
-    return {"Status": "access the api route - " + str(a.status_code)}
+    return {"Status": "access the api route"}
 
 
 @app.route("/api", methods=["GET"])
