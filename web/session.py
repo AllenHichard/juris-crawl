@@ -14,6 +14,7 @@ class Session:
         self.type_court = self.cnj[14:16]
         self.returned_processes = []
         self.results = dict()
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}
 
     def config_ssl_op_legacy_server_connect(self):
         ctx = create_urllib3_context()
@@ -32,7 +33,7 @@ class Session:
         soap = bs.BeautifulSoup(html, "html.parser")
         if "processoSelecionado" in html:
             selected_process = soap.find(id="processoSelecionado")["value"]
-            response = self.request.request("GET", self.court.sub_query(selected_process))
+            response = self.request.request("GET", self.court.sub_query(selected_process), headers=self.headers)
             html = response.data.decode("utf-8")
         return html
 
@@ -41,7 +42,7 @@ class Session:
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
             try:
-                response = self.request.request("GET", self.court.url_request)
+                response = self.request.request("GET", self.court.url_request, headers=self.headers)
                 html = response.data.decode("utf-8")
                 html = self.change_query_route(html)
                 extraction = soup_web.Extraction(html)
