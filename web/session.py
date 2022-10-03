@@ -53,3 +53,7 @@ class Session:
             except:
                 self.results[key_result] = {"Status": "Crawler Impedido de Acessar"}
         return self.results
+
+
+#https://stackoverflow.com/questions/40430799/503-reponse-when-trying-to-use-python-request-on-local-website
+#https://stackoverflow.com/questions/20832298/python-requests-503-erros-when-trying-to-access-localhost8000
