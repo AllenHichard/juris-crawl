@@ -38,8 +38,6 @@ class Session:
 
     def consult_validated_process(self, degrees_court):
         for index, degree_court in enumerate(degrees_court):
-            if index == 1: #capturar somente o segundo grau
-                continue
             self.court = degree_court.ConfigurationRequisition(self.cnj)
             key_result = self.court.state + " " + self.court.degree
             try:
