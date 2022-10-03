@@ -4,7 +4,7 @@ import bs4 as bs
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
 import os
-os.environ['no_proxy'] = '*'
+os.environ['no_proxy'] = ''
 
 class Session:
 
