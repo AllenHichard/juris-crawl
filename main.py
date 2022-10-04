@@ -1,13 +1,20 @@
+import requests
+
 from web import session as session
 from flask import Flask, Response
 import json
+import asyncio
 
 app = Flask(__name__)
 
+async def consult():
+    return requests.get("https://www2.tjal.jus.br/cpopg/open.do")
 
 @app.route("/", methods=["GET"])
-def default():
-    return {"Status": "access the api route"}
+async def default():
+    resposta = await consult()
+    return {"Status": "access the api route" + str(resposta.status_code)}
+
 
 
 @app.route("/api", methods=["GET"])
