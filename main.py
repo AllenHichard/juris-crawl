@@ -3,6 +3,9 @@ from flask import Flask, Response
 import json
 import requests
 
+import os
+os.environ['no_proxy'] = '*'
+
 app = Flask(__name__)
 
 
@@ -10,11 +13,7 @@ app = Flask(__name__)
 def default():
     session = requests.Session()
     session.trust_env = False
-    r = session.get("https://www2.tjal.jus.br/cpopg/open.do", proxies = {
-          "http": "",
-          "https": "",
-        }
-)
+    r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
     return {"Status": "access the api route"}
 
 
