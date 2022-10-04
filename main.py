@@ -11,11 +11,11 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    #session = requests.Session()
-    #session.trust_env = False
-    #r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
-    #return {"Status": "access the api route"}
-    return dict(os.environ)
+    session = requests.Session()
+    session.trust_env = False
+    r = session.get("https://www2.tjal.jus.br/cpopg/open.do", proxies= { 'no_proxy': "*", } )
+    return {"Status": "access the api route"}
+
 
 
 @app.route("/api", methods=["GET"])
