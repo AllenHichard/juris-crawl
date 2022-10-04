@@ -11,16 +11,16 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    #session = requests.Session()
-    #session.trust_env = False
-    #r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
-    #return {"Status": "access the api route"}
-    return dict(os.environ["PORT"])
+    session = requests.Session()
+    session.trust_env = False
+    r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
+    return {"Status": "access the api route"}
 
 
 @app.route("/api", methods=["GET"])
 def connected_api():
-    return {"Status": "browser successfully connected"}
+    a = dict(os.environ["PORT"])
+    return {"Status": "browser successfully connected" + str(a)}
 
 
 @app.route("/api/consult/<cnj>", methods=["GET"])
@@ -34,4 +34,5 @@ def consult_process(cnj):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    a = int(dict(os.environ)['PORT'])
+    app.run(port=a, debug=True)
