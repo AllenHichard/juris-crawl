@@ -13,7 +13,7 @@ app = Flask(__name__)
 def default():
     session = requests.Session()
     session.trust_env = False
-    r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
+    r = session.get("189.90.162.5")
     return {"Status": "access the api route"}
 
 
