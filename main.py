@@ -19,8 +19,7 @@ def default():
 
 @app.route("/api", methods=["GET"])
 def connected_api():
-    a = dict(os.environ["PORT"])
-    return {"Status": "browser successfully connected" + str(a)}
+    return {"Status": "browser successfully connected"}
 
 
 @app.route("/api/consult/<cnj>", methods=["GET"])
@@ -34,5 +33,4 @@ def consult_process(cnj):
 
 
 if __name__ == "__main__":
-    a = int(dict(os.environ)['PORT'])
-    app.run(port=a, debug=True)
+    app.run(debug=True)
