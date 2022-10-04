@@ -15,7 +15,7 @@ def default():
     #session.trust_env = False
     #r = session.get("https://www2.tjal.jus.br/cpopg/open.do")
     #return {"Status": "access the api route"}
-    return dict(os.environ)
+    return dict(os.environ["PORT"])
 
 
 @app.route("/api", methods=["GET"])
