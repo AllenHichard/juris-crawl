@@ -7,22 +7,21 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def default():
-    return {"Status": "access the api route"}
+    msg = {"Status": "access the api route"}
+    return Response(response=json.dumps(msg), status=200, mimetype="application/json")
 
 
 @app.route("/api", methods=["GET"])
 def connected_api():
-    return {"Status": "browser successfully connected"}
+    msg = {"Status": "browser successfully connected"}
+    return Response(response=json.dumps(msg), status=200, mimetype="application/json")
 
 
 @app.route("/api/consult/<cnj>", methods=["GET"])
 def consult_process(cnj):
     s = session.Session(cnj=cnj)
-    if len(s.cnj) == 20:
-        s.consult_process()
-        return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
-    else:
-        return Response(response=json.dumps({"Status": "cnj incorreto"}), status=200, mimetype="application/json")
+    s.consult_process()
+    return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
 
 
 if __name__ == "__main__":
