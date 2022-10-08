@@ -13,13 +13,8 @@ class ConfigurationRequisition(pattern.Court):
 
     def configure_route(self):
         dict_route = {
-            "conversationId": "",
-            "paginaConsulta": "0",
             "cbPesquisa": "NUMPROC",
-            "numeroDigitoAnoUnificado": self.cnj[:15],
-            "foroNumeroUnificado": self.cnj.split('.')[-1],
             "dePesquisaNuUnificado": self.cnj,
-            "dePesquisa": "",
             "tipoNuProcesso": "UNIFICADO"
         }
         list_route = []

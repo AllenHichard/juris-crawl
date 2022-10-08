@@ -2,6 +2,7 @@ from court import pattern
 
 
 class ConfigurationRequisition(pattern.Court):
+
     def __init__(self, cnj):
         super().__init__()
         self.cnj = cnj

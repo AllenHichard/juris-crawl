@@ -21,11 +21,16 @@ class Session:
         ctx.options |= 0x4  # ssl.OP_LEGACY_SERVER_CONNECT
         return ctx
 
+    def validate_cnj(self):
+        if self.type_court not in dict_courts or len(self.cnj) != 20:
+            self.results = {"Status": "cnj incorreto"}
+            return False
+        return True
+
     def consult_process(self):
-        if self.type_court in dict_courts:
+        if self.validate_cnj():
             return self.consult_validated_process(dict_courts[self.type_court])
         else:
-            self.results = {"Status": "O processo pertence a Alagoas ou Ceará"}
             return self.results
 
     def change_query_route(self, html):

@@ -49,6 +49,20 @@ If you want to run the project locally, you will need to follow these steps:
 - `main` - run the main program file.
   - 'main.py' 
 
+## 💻 API running in Cloud
+
+A CI/CD continuous integration and delivery process was set up on Azure for the proposed API.
+
+- `api link`- The api can be tested using the browser through the configuration below
+  - https://crawler-jus.azurewebsites.net/api/consult/{{cnj}}
+
+- `example` - Algorithm will accept full cnj patterns (25 characters) or just numbers (20 characters)
+  - https://crawler-jus.azurewebsites.net/api/consult/00703379120088060001
+  - https://crawler-jus.azurewebsites.net/api/consult/0070337-91.2008.8.06.0001
+  - https://crawler-jus.azurewebsites.net/api/consult/07108025520188020001
+  - https://crawler-jus.azurewebsites.net/api/consult/0710802-55.2018.8.02.0001
+
+
 ## 💻 ️Local API
 
 The system has a local API, so you can test the local API by running the main.py file.
