@@ -53,7 +53,7 @@ If you want to run the project locally, you will need to follow these steps:
 
 A CI/CD continuous integration and delivery process was set up on Azure for the proposed API.
 
-- `api link`- Get method was used for testing convenience, so no need to configure payloads or headers to run the application.
+- `api link`- The api can be tested using the browser through the configuration below
   - https://crawler-jus.azurewebsites.net/api/consult/{{cnj}}
 
 - `example` - Algorithm will accept full cnj patterns (25 characters) or just numbers (20 characters)
