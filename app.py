@@ -1,5 +1,5 @@
 from web import session as session
-from flask import Flask, Response
+from flask import Flask, Response, request
 import json
 
 app = Flask(__name__)
@@ -18,10 +18,18 @@ def connected_api():
 
 
 @app.route("/api/consult/<cnj>", methods=["GET"])
-def consult_process(cnj):
+def get_consult_process(cnj):
     s = session.Session(cnj=cnj)
     s.consult_process()
     return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+
+@app.route("/api/consult", methods=["POST"])
+def post_consult_process():
+    body = request.get_json()
+    s = session.Session(cnj=body["cnj"])
+    s.consult_process()
+    return Response(response=json.dumps(s.results), status=200, mimetype="application/json")
+
 
 
 if __name__ == "__main__":
