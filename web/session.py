@@ -27,7 +27,6 @@ class Session:
             return False
         return True
 
-
     def consult_process(self):
         if self.validate_cnj():
             return self.consult_validated_process(dict_courts[self.type_court])
